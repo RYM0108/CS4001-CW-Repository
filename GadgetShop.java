@@ -136,9 +136,11 @@ public class GadgetShop extends Application {
         RadioButton lightThemeButton = new RadioButton();
         RadioButton darkThemeButton = new RadioButton();
         
+        //Add these two labels next to the radio buttons 
         Label lightThemeLabel = new Label("Enable Light Theme:");
         Label darkThemeLabel = new Label("Enable Dark Theme:");
         
+        //Position the labels next to the radio buttons
         lightThemeButton.setLayoutX(670);
         lightThemeButton.setLayoutY(40);
         
@@ -240,6 +242,8 @@ public class GadgetShop extends Application {
             displayNumber.setStyle("");
             lightThemeLabel.setStyle("");
             darkThemeLabel.setStyle("");
+
+            //Remove the CSS style class from these buttons back to it's default 
             mobileButton.getStyleClass().remove("mobileButton");
             mp3Button.getStyleClass().remove("mp3Button");
             clearButton.getStyleClass().remove("clearButton");
@@ -280,7 +284,7 @@ public class GadgetShop extends Application {
         //Buttons and Action Peformed Methods
         mobileButton.setOnAction(e -> {
            try {
-                // Check for empty Strings 
+                //Check for empty Strings 
                 if(modelField.getText().trim().isBlank() || priceField.getText().trim().isBlank() || 
                    weightField.getText().trim().isBlank() || sizeField.getText().trim().isBlank() || 
                    creditField.getText().trim().isBlank()) {
@@ -433,6 +437,7 @@ public class GadgetShop extends Application {
             try {
                int duration_error = Integer.parseInt(duration_);
             } catch(NumberFormatException error) {
+               //When the error is shown, display a dialog box to show the error
                Alert alert = new Alert(AlertType.INFORMATION);
                alert.setTitle("Duration Call");
                alert.setHeaderText("Invalid Duration number!");
@@ -442,18 +447,19 @@ public class GadgetShop extends Application {
 
             //IF the display number is Empty OR display number is less than 0 OR display number is more than the gadget size THEN show a Dialog Box
             if(display_number.isEmpty() || Integer.parseInt(display_number) < 0 || Integer.parseInt(display_number) >= gadgets.size()) { 
+               //Dsiplay the dialog if the condition is met
                Alert alert = new Alert(AlertType.INFORMATION);
                alert.setTitle("Display Number");
                alert.setHeaderText("Invalid Display Number!");
                alert.setContentText("Enter a Suitable Display Number from your Array List");
                alert.showAndWait();
             } else if(!display_number.contains("-1")) {
-               Mobile user = (Mobile) gadgets.get(Integer.parseInt(display_number)); //
-               user.makeCall(phone_number, Integer.parseInt(duration_)); //
-               System.out.println(user.toString());
+               Mobile user = (Mobile) gadgets.get(Integer.parseInt(display_number)); //Downcast Gadget to Mobile to get Mobile-specific methods
+               user.makeCall(phone_number, Integer.parseInt(duration_)); //Call the makeCall() method from Mobile class which returns the calcualted credit
+               System.out.println(user.toString()); //Display the Mobile details with the remaining credits
             }
 
-            //
+            //try/catch statement to check the displayNumberField contains -1
             try {
                 //Check if displayNumber contains -1
                 int idx = Integer.parseInt(display_number);
@@ -481,24 +487,25 @@ public class GadgetShop extends Application {
                    System.out.println(error.getMessage()); //Display the message from IllegalArugmentException parameter
             }
 
-            //
+            //Get the text data from the user input
             String display_number = displayNumberField.getText();
             int download_size = Integer.parseInt(downloadSizeField.getText());
 
             //IF the display number is Empty OR display number is less than 0 OR display number is more than the gadget size THEN show a Dialog Box
             if(display_number.isEmpty() || Integer.parseInt(display_number) < 0 || Integer.parseInt(display_number) >= gadgets.size()) {
+               //Show the Dialog one the condition is met
                Alert alert = new Alert(AlertType.INFORMATION);
                alert.setTitle("Display Number");
                alert.setHeaderText("Invalid Display Number!");
                alert.setContentText("Enter a Suitable Display Number from your Array List");
                alert.showAndWait();
             } else if(!display_number.contains("-1")) {
-                MP3 user = (MP3) gadgets.get(Integer.parseInt(display_number)); //
-                user.downloadMusic(download_size); //
-                System.out.println(user.toString());
+                MP3 user = (MP3) gadgets.get(Integer.parseInt(display_number)); //Downcast Gadget to MP3 to get MP3-specific methods
+                user.downloadMusic(download_size); //Call the downloadMusic() method from MP3 class which returns the memory size of the music
+                System.out.println(user.toString()); //Display the MP3 details with the available memory
             }
 
-            //
+            //try/catch statement to check the displayNumberField contains -1
             try {
                 //Check if displayNumber contains -1
                 int idx = Integer.parseInt(display_number);
@@ -517,9 +524,9 @@ public class GadgetShop extends Application {
         //Adds a CSS stylesheet to the scene
         scene.getStylesheets().add(getClass().getResource("GadgetShopCustomisation.css").toExternalForm());  
 
-        //
+        //Set the window title
         stage.setTitle("Gadget Shop");
-        stage.setScene(scene);
-        stage.show();    
+        stage.setScene(scene); //Load the scene
+        stage.show(); //Display the Window    
     }
 }
