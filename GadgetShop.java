@@ -447,7 +447,7 @@ public class GadgetShop extends Application {
 
             //IF the display number is Empty OR display number is less than 0 OR display number is more than the gadget size THEN show a Dialog Box
             if(display_number.isEmpty() || Integer.parseInt(display_number) < 0 || Integer.parseInt(display_number) >= gadgets.size()) { 
-               //Dsiplay the dialog if the condition is met
+               //Display the dialog if the condition is met
                Alert alert = new Alert(AlertType.INFORMATION);
                alert.setTitle("Display Number");
                alert.setHeaderText("Invalid Display Number!");
@@ -493,7 +493,7 @@ public class GadgetShop extends Application {
 
             //IF the display number is Empty OR display number is less than 0 OR display number is more than the gadget size THEN show a Dialog Box
             if(display_number.isEmpty() || Integer.parseInt(display_number) < 0 || Integer.parseInt(display_number) >= gadgets.size()) {
-               //Show the Dialog one the condition is met
+               //Show the Dialog once the condition is met
                Alert alert = new Alert(AlertType.INFORMATION);
                alert.setTitle("Display Number");
                alert.setHeaderText("Invalid Display Number!");
